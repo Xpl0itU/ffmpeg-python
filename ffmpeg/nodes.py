@@ -285,7 +285,7 @@ class FilterNode(Node):
         if self.name in ('split', 'asplit'):
             args = [len(outgoing_edges)]
 
-        out_args = [escape_chars(x, '\\\'=:') for x in args]
+        out_args = [x if os.path.exists(x) else escape_chars(x, '\\\'=:') for x in args]
         out_kwargs = {}
         for k, v in list(kwargs.items()):
             k = escape_chars(k, '\\\'=:')
